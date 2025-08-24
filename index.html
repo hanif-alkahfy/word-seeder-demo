@@ -75,7 +75,7 @@ fetch("words.json").then(r=>r.json()).then(d=>{words=d.words;});
     let pick=pool.slice(0,100);
     let s=words[b(input)%words.length];
     let out=c(pick,s);
-    document.getElementById("result").innerHTML='<p>words = [ '+out.map(w=>'"'+w+'"').join(", ")+' ]</p>';
+    document.getElementById("result").innerHTML='<p>[ '+out.map(w=>'"'+w+'"').join(", ")+' ]</p>';
   };
   window.generates=window.x7gen;
 })();
