@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>No Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+      text-align: center;
+      background: #121212;
+      color: #e0e0e0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 8px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #333;
+      color: #f0f0f0;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #444;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #555;
+      border-radius: 8px;
+      background: #1e1e1e;
+      text-align: left;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <button class="btn" onclick="generateSalt('gmail')"><i class="fa-brands fa-google"></i> Gmail</button>
+    <button class="btn" onclick="generateSalt('discord')"><i class="fa-brands fa-discord"></i> Discord</button>
+    <button class="btn" onclick="generateSalt('facebook')"><i class="fa-brands fa-facebook"></i> Facebook</button>
+    <button class="btn" onclick="generateSalt('github')"><i class="fa-brands fa-github"></i> GitHub</button>
+    <button class="btn" onclick="generateSalt('instagram')"><i class="fa-brands fa-instagram"></i> Instagram</button>
+    <button class="btn" onclick="generateSalt('linkedin')"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+    <button class="btn" onclick="generateSalt('x')"><i class="fa-brands fa-x-twitter"></i> X</button>
+    <button class="btn" onclick="generateSalt('steam')"><i class="fa-brands fa-steam"></i> Steam</button>
+  </div>
+
+  <div id="result"></div>
+    <script>
+
+        let words = [];
+
+        fetch("words.json")
+        .then(response => response.json())
+        .then(data => {
+            words = data.words;
+        });
+
+        (function(){
+            const _0x4c1d=["length","floor","random","charCodeAt","abs","map","join","innerHTML","result"];
+            
+            function _0x5a8d(_0x7e38){
+                for(let _0x38c5=_0x7e38[_0x4c1d[0]]-1;_0x38c5>0;_0x38c5--){
+                const _0x1427=Math[_0x4c1d[1]](Math[_0x4c1d[2]]()*(_0x38c5+1));
+                [_0x7e38[_0x38c5],_0x7e38[_0x1427]]=[_0x7e38[_0x1427],_0x7e38[_0x38c5]];
+                }
+            }
+
+            function _0x1d3f(_0x5efb){
+                let _0x4251=0;
+                for(let _0x56c1=0;_0x56c1<_0x5efb[_0x4c1d[0]];_0x56c1++){
+                _0x4251=(_0x4251<<5)-_0x4251+_0x5efb[_0x4c1d[3]](_0x56c1);
+                _0x4251|=0;
+                }
+                return Math[_0x4c1d[4]](_0x4251);
+            }
+
+            async function _0x2e1a(_0x4f5f){
+                let _0x4731=[...words];
+                _0x5a8d(_0x4731);
+                let _0x2db8=_0x4731.slice(0,100);
+                const _0x3eaf=_0x1d3f(_0x4f5f)%words[_0x4c1d[0]];
+                const _0x25ad=words[_0x3eaf];
+                _0x2db8[5]=_0x25ad;
+                document.getElementById(_0x4c1d[8])[_0x4c1d[7]]=`<p>words = [ ${_0x2db8[_0x4c1d[5]](_0x125d=>"\""+_0x125d+"\"")[_0x4c1d[6]](", ")} ]</p>`;
+            }
+
+            window.shuffle=_0x5a8d;
+            window.hashString=_0x1d3f;
+            window.generateSalt=_0x2e1a;
+        })();
+    </script>
+</body>
+</html>
