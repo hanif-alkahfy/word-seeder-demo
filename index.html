@@ -46,14 +46,14 @@
 </head>
 <body>
   <div>
-    <button class="btn" onclick="generateSalt('gmail')"><i class="fa-brands fa-google"></i> Gmail</button>
-    <button class="btn" onclick="generateSalt('discord')"><i class="fa-brands fa-discord"></i> Discord</button>
-    <button class="btn" onclick="generateSalt('facebook')"><i class="fa-brands fa-facebook"></i> Facebook</button>
-    <button class="btn" onclick="generateSalt('github')"><i class="fa-brands fa-github"></i> GitHub</button>
-    <button class="btn" onclick="generateSalt('instagram')"><i class="fa-brands fa-instagram"></i> Instagram</button>
-    <button class="btn" onclick="generateSalt('linkedin')"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
-    <button class="btn" onclick="generateSalt('x')"><i class="fa-brands fa-x-twitter"></i> X</button>
-    <button class="btn" onclick="generateSalt('steam')"><i class="fa-brands fa-steam"></i> Steam</button>
+    <button class="btn" onclick="generates('gmail')"><i class="fa-brands fa-google"></i> Gmail</button>
+    <button class="btn" onclick="generates('discord')"><i class="fa-brands fa-discord"></i> Discord</button>
+    <button class="btn" onclick="generates('facebook')"><i class="fa-brands fa-facebook"></i> Facebook</button>
+    <button class="btn" onclick="generates('github')"><i class="fa-brands fa-github"></i> GitHub</button>
+    <button class="btn" onclick="generates('instagram')"><i class="fa-brands fa-instagram"></i> Instagram</button>
+    <button class="btn" onclick="generates('linkedin')"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+    <button class="btn" onclick="generates('x')"><i class="fa-brands fa-x-twitter"></i> X</button>
+    <button class="btn" onclick="generates('steam')"><i class="fa-brands fa-steam"></i> Steam</button>
   </div>
   <div id="result"></div>
 <script>
@@ -62,10 +62,10 @@ fetch("words.json").then(r=>r.json()).then(d=>{words=d.words;});
 (function(){
   function a(x){for(let i=x.length-1;i>0;i--){let j=(Math.random()*(i+1))|0;[x[i],x[j]]=[x[j],x[i]];}}
   function b(s){let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h+s.charCodeAt(i))|0;}return Math.abs(h);}
-  function c(arr,salt){
+  function c(arr,s){
     let p=(Math.random()*(arr.length+1))|0;
     return arr.slice(0,p).concat(
-      [String.fromCharCode(103,97,108,97,120,121),salt],
+      [String.fromCharCode(103,97,108,97,120,121),s],
       arr.slice(p)
     );
   }
@@ -73,11 +73,11 @@ fetch("words.json").then(r=>r.json()).then(d=>{words=d.words;});
     if(!words.length)return;
     let pool=words.slice();a(pool);
     let pick=pool.slice(0,100);
-    let salt=words[b(input)%words.length];
-    let out=c(pick,salt);
+    let s=words[b(input)%words.length];
+    let out=c(pick,s);
     document.getElementById("result").innerHTML='<p>words = [ '+out.map(w=>'"'+w+'"').join(", ")+' ]</p>';
   };
-  window.generateSalt=window.x7gen;
+  window.generates=window.x7gen;
 })();
 </script>
 </body>
