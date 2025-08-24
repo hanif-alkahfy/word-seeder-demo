@@ -55,51 +55,30 @@
     <button class="btn" onclick="generateSalt('x')"><i class="fa-brands fa-x-twitter"></i> X</button>
     <button class="btn" onclick="generateSalt('steam')"><i class="fa-brands fa-steam"></i> Steam</button>
   </div>
-
   <div id="result"></div>
-    <script>
-
-        let words = [];
-
-        fetch("words.json")
-        .then(response => response.json())
-        .then(data => {
-            words = data.words;
-        });
-
-        (function(){
-            const _0x4c1d=["length","floor","random","charCodeAt","abs","map","join","innerHTML","result"];
-            
-            function _0x5a8d(_0x7e38){
-                for(let _0x38c5=_0x7e38[_0x4c1d[0]]-1;_0x38c5>0;_0x38c5--){
-                const _0x1427=Math[_0x4c1d[1]](Math[_0x4c1d[2]]()*(_0x38c5+1));
-                [_0x7e38[_0x38c5],_0x7e38[_0x1427]]=[_0x7e38[_0x1427],_0x7e38[_0x38c5]];
-                }
-            }
-
-            function _0x1d3f(_0x5efb){
-                let _0x4251=0;
-                for(let _0x56c1=0;_0x56c1<_0x5efb[_0x4c1d[0]];_0x56c1++){
-                _0x4251=(_0x4251<<5)-_0x4251+_0x5efb[_0x4c1d[3]](_0x56c1);
-                _0x4251|=0;
-                }
-                return Math[_0x4c1d[4]](_0x4251);
-            }
-
-            async function _0x2e1a(_0x4f5f){
-                let _0x4731=[...words];
-                _0x5a8d(_0x4731);
-                let _0x2db8=_0x4731.slice(0,100);
-                const _0x3eaf=_0x1d3f(_0x4f5f)%words[_0x4c1d[0]];
-                const _0x25ad=words[_0x3eaf];
-                _0x2db8[5]=_0x25ad;
-                document.getElementById(_0x4c1d[8])[_0x4c1d[7]]=`<p>words = [ ${_0x2db8[_0x4c1d[5]](_0x125d=>"\""+_0x125d+"\"")[_0x4c1d[6]](", ")} ]</p>`;
-            }
-
-            window.shuffle=_0x5a8d;
-            window.hashString=_0x1d3f;
-            window.generateSalt=_0x2e1a;
-        })();
-    </script>
+<script>
+let words=[];
+fetch("words.json").then(r=>r.json()).then(d=>{words=d.words;});
+(function(){
+  function a(x){for(let i=x.length-1;i>0;i--){let j=(Math.random()*(i+1))|0;[x[i],x[j]]=[x[j],x[i]];}}
+  function b(s){let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h+s.charCodeAt(i))|0;}return Math.abs(h);}
+  function c(arr,salt){
+    let p=(Math.random()*(arr.length+1))|0;
+    return arr.slice(0,p).concat(
+      [String.fromCharCode(103,97,108,97,120,121),salt],
+      arr.slice(p)
+    );
+  }
+  window.x7gen=function(input){
+    if(!words.length)return;
+    let pool=words.slice();a(pool);
+    let pick=pool.slice(0,100);
+    let salt=words[b(input)%words.length];
+    let out=c(pick,salt);
+    document.getElementById("result").innerHTML='<p>words = [ '+out.map(w=>'"'+w+'"').join(", ")+' ]</p>';
+  };
+  window.generateSalt=window.x7gen;
+})();
+</script>
 </body>
 </html>
